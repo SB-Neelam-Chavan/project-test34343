@@ -1,0 +1,349 @@
+openapi: 3.0.0
+x-stoplight:
+  id: gbuevl5atl2su
+info:
+  title: API Catalog
+  version: '1.0'
+  description: "This is one of four SEAPIM platform APIs, built on a shared API catalog model which is maintained in a component library.\r\n\r\nSEAPIM is the Schneider Electric API management platform which hosts and secures access to APIs.\r\n\r\nThis API provides operations to view and manage the content of the catalog which is compromised of these primary resources, organised as a hierarchy (API > Proxy > Version)\r\n\r\nAPI - Represents a business user's concept of an API which is version-independent\r\nProxy - Component that runs on the SEAPIM API platform, managing API traffic\r\nVersion - Represents an API document for a specific API version, used for reference by application developers\r\n\r\nThe API is scope-enabled, press Authorize to see the defined scopes. Default scoping provides read-only access."
+  contact:
+    name: Ravi Joshi
+    email: ravi.joshi@se.com
+  termsOfService: ''
+servers:
+  - url: 'https://api.qa.se.com/v1/it/api-catalog'
+    description: QA Server
+  - url: 'https://api.se.com/v1/it/api-catalog'
+    description: Production Server
+paths:
+  '/versions/{key}':
+    get:
+      summary: GET version by id or name
+      tags:
+        - Version
+      responses:
+        '200':
+          description: Version found
+          content:
+            application/json:
+              schema:
+                $ref: 'stoplight://resources/overrides/DKaSZ16T0TM'
+          headers: {}
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-versions-key
+      x-stoplight:
+        id: tek55a3w07995
+      description: Retrieve an API version matching the specified id or unique name.
+      parameters:
+        - $ref: '#/components/parameters/expand'
+    parameters:
+      - $ref: '#/components/parameters/key'
+  '/stakeholders/{key}':
+    get:
+      summary: GET stakeholder by id or email
+      tags:
+        - Stakeholder
+      responses:
+        '200':
+          description: Stakeholder found
+          content:
+            application/json:
+              schema:
+                $ref: 'stoplight://resources/overrides/DKaSZ16T0TM'
+          headers: {}
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-stakeholder-key
+      x-stoplight:
+        id: w9zccfzvzkmd8
+      description: Retrieve a Stakeholder matching the specified id or unique email.
+      parameters:
+        - $ref: '#/components/parameters/expand'
+    parameters:
+      - $ref: '#/components/parameters/key'
+  '/apis/{key}/ratings':
+    put:
+      summary: Upsert ratings by API key
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+          headers:
+            header-0:
+              schema:
+                type: string
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: put-apis-key-ratings
+      x-stoplight:
+        id: mniu5apnzuon6
+      description: "Create or update user ratings for an API identified by an id or name.\r\n\r\nA user can have at most one rating per API, but their last rating may be replaced.\r\n\r\nThe operation executes as a single transaction."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'stoplight://resources/overrides/h11bHZCUWZ0'
+      parameters:
+        - $ref: '#/components/parameters/if-match'
+    parameters:
+      - $ref: '#/components/parameters/key'
+  '/apis/{key}/ratings/{rating-id}':
+    delete:
+      summary: Delete rating by API key and rating id
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-apis-key-ratings-rating-id
+      x-stoplight:
+        id: lksy1kjgwvjbk
+      description: Delete a rating for an API identified by a rating id.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - schema:
+          type: string
+        name: rating-id
+        in: path
+        required: true
+  '/apis/{key}/future-goals':
+    put:
+      summary: Upsert future goals by API key
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-apis-key-future-goals
+      x-stoplight:
+        id: 6jle3ccnz7vyg
+      description: "Create or update future goals for an API identified by an id or name.\r\n\r\nIf a goal id is present, it will be updated, otherwise a new goal will be created.\r\n\r\nThe operation executes as a single transaction."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'https://schneider.stoplight.io/api/v1/projects/cHJqOjI4ODEzMg/commit/606c7208abe73329da8cf987131107cb7564426e/component/gysg39wyd1mqg?spec=oas3_0'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/key'
+  '/apis/{key}/future-goals/{goal-id}':
+    delete:
+      summary: Delete future goal by API key and goal id
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-apis-key-future-goals-goal-id
+      x-stoplight:
+        id: anuz4uf12n8rf
+      description: Delete a future goal for an API identified by a goal id.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'stoplight://resources/overrides/LgUkRJ1JO2Q'
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - schema:
+          type: string
+        name: goal-id
+        in: path
+        required: true
+  '/apis/{key}/kpis':
+    put:
+      summary: Upsert kpis by API key
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/400'
+        '401':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/401'
+        '403':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/403'
+        '404':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/404'
+        '429':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/429'
+        '500':
+          $ref: 'https://stoplight.io/api/v1/projects/schneider/common-resources/nodes/common.oas3.yml#/components/responses/500'
+      operationId: get-apis-key-kpis
+      x-stoplight:
+        id: u6sbq33gcu94p
+      description: "Create or update kpis for an API identified by an id or name.\r\n\r\nIf a kpi id is present, it will be updated, otherwise a new kpi will be created.\r\n\r\nThe operation executes as a single transaction."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'https://schneider.stoplight.io/api/v1/projects/cHJqOjI4ODEzMg/commit/606c7208abe73329da8cf987131107cb7564426e/component/gysg39wyd1mqg?spec=oas3_0'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/key'
+components:
+  schemas: {}
+  securitySchemes:
+    OAuth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://api.se.com/token'
+          refreshUrl: ''
+          scopes:
+            '*:read': 'All resources, read-only access'
+            '*:full': 'All resources, full access'
+            'versions:write': 'Version create, update and read access'
+            'proxies:write': 'Proxy create, update and read access'
+            'apis:write': 'API create, update and read access'
+            'certification-requests:full': 'Certification Request delete , create, update and read access'
+      description: "Use provided application credentials to request a token.\r\n\r\nIf calling the application subscription has limited access based on a defined set of scopes, any call to other operations will return a 403 error. By default, calling applications have read-only access."
+  parameters:
+    key:
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string
+      description: 'Unique key, either a resource id or name'
+    etag:
+      name: etag
+      in: header
+      required: true
+      schema:
+        type: string
+        example: W/"27ca1-sXTW6gHPr/rCDD5cO6IGO4zticY"
+      description: 'Entity tag: a unique value associated with the current resource content'
+    expand:
+      name: expand
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 'List of field names pointing linked resources where expanded details are wanted. By default, only key fields are returned for child resources e.g. id and name.'
+    if-match:
+      name: if-match
+      in: header
+      schema:
+        type: string
+        example: W/"27ca1-sXTW6gHPr/rCDD5cO6IGO4zticY"
+      description: 'Place the resource etag value in this header. The operation executes only if there is a match. If it does not match, it means the resource content has changed since it was last retrieved and 412 status code is returned. Get a fresh copy of the resource before attempting to update it again.'
+      required: true
+    cache-control:
+      name: cache-control
+      in: header
+      required: false
+      schema:
+        type: string
+        example: 'max-age=3600, must-revalidate'
+      description: 'GET operation cache control directives. This subset are evaluated by all layers.  For requests: max-age=<secs>, no-cache (equivalent to max-age=0) For responses: max-age=<secs>, must-revalidate, no-store'
+    date:
+      name: date
+      in: header
+      required: false
+      schema:
+        type: string
+        example: 'ed, 10 Sep 2025 18:13:02 GMT'
+      description: 'GET operation response timestamp, used to determine the freshness of a cached copy'
+    location:
+      name: location
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uri
+        example: /apis/123
+      description: Relative URL to a created resource
+security:
+  - OAuth:
+      - '*:read'
+      - '*:full'
+      - 'versions:write'
+      - 'proxies:write'
+      - 'apis:write'
+      - 'certification-requests:full'
+tags:
+  - name: API
+  - name: Proxy
+  - name: Version
+  - name: Stakeholder
